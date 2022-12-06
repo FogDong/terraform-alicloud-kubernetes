@@ -134,3 +134,8 @@ resource "alicloud_cs_kubernetes" "k8s" {
   }
   depends_on = [alicloud_snat_entry.default]
 }
+
+data "alicloud_cs_cluster_credential" "auth" {
+  cluster_id                 = resource.alicloud_cs_kubernetes.k8s.0.id
+  temporary_duration_minutes = 60
+}

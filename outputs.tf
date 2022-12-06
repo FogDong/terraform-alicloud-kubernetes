@@ -31,5 +31,10 @@ output "cluster_nodes" {
 
 output "this_k8s_node_ids" {
   description = "List ids of of cluster node."
-  value       = [for _, obj in concat(alicloud_cs_kubernetes.k8s.*.worker_nodes, [{}])[0] : lookup(obj,"id")]
+  value       = [for _, obj in concat(alicloud_cs_kubernetes.k8s.*.worker_nodes, [{}])[0] : lookup(obj, "id")]
+}
+
+output "kube_config" {
+  description = "value of kube_config"
+  value       = data.alicloud_cs_cluster_credential.auth.kube_config
 }
